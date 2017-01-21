@@ -1,1 +1,2 @@
 export const CREATE_CITY = 'CREATE_CITY';
+export const LOAD_CITIES_SUCCESS = 'LOAD_CITIES_SUCCESS';

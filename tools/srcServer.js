@@ -3,8 +3,8 @@ import webpack from 'webpack';
 import path from 'path';
 import config from '../webpack.config.dev';
 import open from 'open';
-
-
+import apiRouter from '../api';
+import parser from 'body-parser';
 /* eslint-disable no-console */
 
 const port = 3000;
@@ -18,9 +18,14 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
+app.use('/api', apiRouter);
+
 app.get('*', function(req, res) {
   res.sendFile(path.join( __dirname, '../src/index.html'));
 });
+
+app.use(parser.json());
+app.use(parser.urlencoded({extended:false}));
 
 app.listen(port, function(err) {
   if (err) {
